@@ -1,5 +1,6 @@
-import pgClient from "../db/config.js";
+import pgPool from "../db/config.js";
 import convertSchema from "../helpers/convertSchema.js";
+import xss from "xss";
 
 /**
  * Function to create a database table
@@ -8,15 +9,20 @@ import convertSchema from "../helpers/convertSchema.js";
  */
 export const createTable = async (tableName, tableSchemaArray) => {
   try {
-    const schema = convertSchema(tableSchemaArray);
-    const text = `CREATE TABLE IF NOT EXISTS ${tableName} (
+    const client = await pgPool.connect();
+    const schema = xss(convertSchema(tableSchemaArray));
+    const text = `CREATE TABLE IF NOT EXISTS ${xss(tableName)} (
         ${schema}
     );`;
-    await pgClient.connect();
-    await pgClient.query(text);
+    await client.query(text);
+    client.release();
+    return { success: true, message: "table created" };
   } catch (error) {
     console.log(error);
-  } finally {
-    await pgClient.end();
+    return {
+      success: false,
+      message: "table not created",
+      errorMessage: error,
+    };
   }
 };

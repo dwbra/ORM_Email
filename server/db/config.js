@@ -13,12 +13,12 @@
 
 import pg from "pg";
 
-const { Client } = pg;
+const { Pool } = pg;
 
-const pgClient = new Client({
+const pgPool = new Pool({
   user: `${process.env.DB_USER}`,
   password: null,
   database: `${process.env.DB_NAME}`,
 });
 
-export default pgClient;
+export default pgPool;
