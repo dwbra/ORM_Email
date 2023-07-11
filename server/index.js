@@ -3,6 +3,7 @@ import cors from "cors";
 import "dotenv/config";
 
 import emailRoutes from "./routes/emailRoutes.js";
+import dbRoutes from "./routes/dbRoutes.js";
 
 const app = express();
 
@@ -11,7 +12,8 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(express.json());
 app.use(cors());
 
-app.use(emailRoutes);
+app.use("/post-email", emailRoutes);
+app.use("/db", dbRoutes);
 
 const PORT = process.env.PORT || 9000;
 
