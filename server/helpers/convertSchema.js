@@ -3,7 +3,7 @@
 [
     [colName: string, dataType: string, columnConstraints: string]
 ]
- */
+*/
 
 //Example Data
 // const testData = [

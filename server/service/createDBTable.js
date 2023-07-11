@@ -6,6 +6,7 @@ import xss from "xss";
  * Function to create a database table
  * @param {String} tableName Name of the table you'd like to create
  * @param {String[]} tableSchemaArray An array of string arrays containing the schema you'd like to assign to the table
+ * @returns {Object}
  */
 export const createTable = async (tableName, tableSchemaArray) => {
   try {

@@ -5,6 +5,7 @@ import "dotenv/config";
  * Function to drop a database table
  * @param {String} tableName Name of the table you'd like to drop
  * @param {String} password The env password required to drop tables
+ * @returns {Object}
  */
 export const dropTable = async (tableName, password) => {
   try {
